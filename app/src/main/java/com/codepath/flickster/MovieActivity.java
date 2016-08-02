@@ -1,7 +1,7 @@
-package com.example.totsuka.flickster;
+package com.codepath.flickster;
 
-import com.example.totsuka.flickster.adapters.MovieArrayAdapter;
-import com.example.totsuka.flickster.models.Movie;
+import com.codepath.flickster.adapters.MovieArrayAdapter;
+import com.codepath.flickster.models.Movie;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 

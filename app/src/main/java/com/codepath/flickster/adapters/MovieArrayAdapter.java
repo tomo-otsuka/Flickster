@@ -1,7 +1,7 @@
-package com.example.totsuka.flickster.adapters;
+package com.codepath.flickster.adapters;
 
-import com.example.totsuka.flickster.R;
-import com.example.totsuka.flickster.models.Movie;
+import com.codepath.flickster.R;
+import com.codepath.flickster.models.Movie;
 import com.squareup.picasso.Picasso;
 
 import android.content.Context;
@@ -14,9 +14,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-/**
- * Created by totsuka on 8/1/16.
- */
 public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
     public MovieArrayAdapter(Context context, List<Movie> movies) {

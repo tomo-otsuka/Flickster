@@ -1,4 +1,4 @@
-package com.example.totsuka.flickster;
+package com.codepath.flickster;
 
 import org.junit.Test;
 

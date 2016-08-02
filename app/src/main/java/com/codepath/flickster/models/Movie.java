@@ -1,4 +1,4 @@
-package com.example.totsuka.flickster.models;
+package com.codepath.flickster.models;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -5,7 +5,7 @@ android {
     buildToolsVersion "24.0.1"
 
     defaultConfig {
-        applicationId "com.example.totsuka.flickster"
+        applicationId "com.codepath.flickster"
         minSdkVersion 16
         targetSdkVersion 24
         versionCode 1
