@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="150dp">
 
     <ImageView
-            app:layout_widthPercent="34%"
-            android:layout_height="wrap_content"
-            android:id="@+id/ivMovieImage" android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true" android:layout_alignParentStart="true"
-            tools:src="@mipmap/ic_launcher"/>
+        app:layout_widthPercent="34%"
+        app:layout_heightPercent="100%"
+        android:id="@+id/ivMovieImage" android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true" android:layout_alignParentStart="true"
+        tools:src="@mipmap/ic_launcher"/>
     <TextView
-            app:layout_widthPercent="66%"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            tools:text="Star Trek Beyond"
-            android:id="@+id/tvTitle" android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/ivMovieImage" android:layout_toEndOf="@+id/ivMovieImage"/>
+        app:layout_widthPercent="66%"
+        app:layout_heightPercent="20%"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        tools:text="Star Trek Beyond"
+        android:id="@+id/tvTitle" android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/ivMovieImage" android:layout_toEndOf="@+id/ivMovieImage"/>
     <TextView
-            app:layout_widthPercent="66%"
-            android:layout_height="wrap_content"
-            tools:text="The USS Enterprise crew explores the furthest reaches of uncharted space, where they encounter a mysterious new enemy who puts them and everything the Federation stands for to the test."
-            android:id="@+id/tvOverview" android:layout_below="@+id/tvTitle"
-            android:layout_toRightOf="@+id/ivMovieImage" android:layout_toEndOf="@+id/ivMovieImage"/>
+        app:layout_widthPercent="66%"
+        app:layout_heightPercent="80%"
+        tools:text="The USS Enterprise crew explores the furthest reaches of uncharted space, where they encounter a mysterious new enemy who puts them and everything the Federation stands for to the test."
+        android:id="@+id/tvOverview" android:layout_below="@+id/tvTitle"
+        android:layout_toRightOf="@+id/ivMovieImage" android:layout_toEndOf="@+id/ivMovieImage"/>
 </android.support.percent.PercentRelativeLayout>
