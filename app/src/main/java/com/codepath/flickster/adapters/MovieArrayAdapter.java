@@ -16,6 +16,12 @@ import java.util.List;
 
 public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
+    private static class ViewHolder {
+        TextView tvTitle;
+        TextView tvOverview;
+        ImageView ivImage;
+    }
+
     public MovieArrayAdapter(Context context, List<Movie> movies) {
         super(context, android.R.layout.simple_list_item_1, movies);
     }
@@ -24,22 +30,26 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
     public View getView(int position, View convertView, ViewGroup parent) {
         Movie movie = getItem(position);
 
+        ViewHolder viewHolder;
         if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.item_movie, parent, false);
+
+            viewHolder = new ViewHolder();
+            viewHolder.tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
+            viewHolder.tvOverview = (TextView) convertView.findViewById(R.id.tvOverview);
+            viewHolder.ivImage = (ImageView) convertView.findViewById(R.id.ivMovieImage);
+
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        ImageView ivImage = (ImageView) convertView.findViewById(R.id.ivMovieImage);
+        viewHolder.ivImage.setImageResource(0);
+        Picasso.with(getContext()).load(movie.getPosterPath()).into(viewHolder.ivImage);
 
-        ivImage.setImageResource(0);
-
-        TextView tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
-        TextView tvOverview = (TextView) convertView.findViewById(R.id.tvOverview);
-
-        tvTitle.setText(movie.getOriginalTitle());
-        tvOverview.setText(movie.getOverview());
-
-        Picasso.with(getContext()).load(movie.getPosterPath()).into(ivImage);
+        viewHolder.tvTitle.setText(movie.getOriginalTitle());
+        viewHolder.tvOverview.setText(movie.getOverview());
 
         return convertView;
     }
