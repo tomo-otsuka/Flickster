@@ -56,7 +56,10 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
             imagePath = movie.getBackdropPath();
         }
 
-        Picasso.with(getContext()).load(imagePath).into(viewHolder.ivImage);
+        Picasso.with(getContext()).load(imagePath).fit().centerInside()
+                .placeholder(R.drawable.movie_placeholder)
+                .error(R.drawable.movie_placeholder)
+                .into(viewHolder.ivImage);
 
         viewHolder.tvTitle.setText(movie.getOriginalTitle());
         viewHolder.tvOverview.setText(movie.getOverview());
