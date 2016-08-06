@@ -5,6 +5,7 @@ import com.codepath.flickster.models.Movie;
 import com.squareup.picasso.Picasso;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,16 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         }
 
         viewHolder.ivImage.setImageResource(0);
-        Picasso.with(getContext()).load(movie.getPosterPath()).into(viewHolder.ivImage);
+        String imagePath;
+
+        int orientation = getContext().getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            imagePath = movie.getPosterPath();
+        } else {
+            imagePath = movie.getBackdropPath();
+        }
+
+        Picasso.with(getContext()).load(imagePath).into(viewHolder.ivImage);
 
         viewHolder.tvTitle.setText(movie.getOriginalTitle());
         viewHolder.tvOverview.setText(movie.getOverview());
