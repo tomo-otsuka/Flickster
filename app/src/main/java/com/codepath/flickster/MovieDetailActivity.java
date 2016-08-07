@@ -26,7 +26,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         tvTitle.setText(intent.getStringExtra("title"));
         tvOverview.setText(intent.getStringExtra("overview"));
 
-        Picasso.with(this).load(intent.getStringExtra("backdropPath")).fit().centerInside()
+        Picasso.with(this).load(intent.getStringExtra("backdropPath")).fit().centerCrop()
                 .placeholder(R.drawable.movie_placeholder)
                 .error(R.drawable.movie_placeholder)
                 .into(ivMovieImage);
