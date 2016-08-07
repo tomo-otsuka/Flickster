@@ -23,18 +23,42 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         ImageView ivImage;
     }
 
+    private static class PopularViewHolder {
+        ImageView ivImage;
+    }
+
     public MovieArrayAdapter(Context context, List<Movie> movies) {
         super(context, R.layout.item_movie, movies);
     }
 
     @Override
+    public int getViewTypeCount() {
+        return Movie.MovieType.values().length;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return getItem(position).getMovieType().ordinal();
+    }
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Movie movie = getItem(position);
+        int movieType = getItemViewType(position);
 
+        if (movieType == Movie.MovieType.POPULAR.ordinal()) {
+            convertView = getViewForPopularMovie(movie, convertView, parent);
+        } else {
+            convertView = getViewForNormalMovie(movie, convertView, parent);
+        }
+
+        return convertView;
+    }
+
+    private View getViewForNormalMovie(Movie movie, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
-            LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.item_movie, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_movie, parent, false);
 
             viewHolder = new ViewHolder();
             viewHolder.tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
@@ -63,6 +87,30 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
         viewHolder.tvTitle.setText(movie.getOriginalTitle());
         viewHolder.tvOverview.setText(movie.getOverview());
+
+        return convertView;
+    }
+
+    private View getViewForPopularMovie(Movie movie, View convertView, ViewGroup parent) {
+        PopularViewHolder viewHolder;
+        if (convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_movie_popular, parent, false);
+
+            viewHolder = new PopularViewHolder();
+            viewHolder.ivImage = (ImageView) convertView.findViewById(R.id.ivMovieImage);
+
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (PopularViewHolder) convertView.getTag();
+        }
+
+        viewHolder.ivImage.setImageResource(0);
+        String imagePath = movie.getBackdropPath();
+
+        Picasso.with(getContext()).load(imagePath).fit().centerInside()
+                .placeholder(R.drawable.movie_placeholder)
+                .error(R.drawable.movie_placeholder)
+                .into(viewHolder.ivImage);
 
         return convertView;
     }

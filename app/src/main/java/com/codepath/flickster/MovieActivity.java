@@ -9,9 +9,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -32,6 +35,7 @@ public class MovieActivity extends AppCompatActivity {
 
         initSwipeContainer();
         fetchMoviesAsync();
+        setupListViewListener();
     }
 
     private void initSwipeContainer() {
@@ -59,7 +63,7 @@ public class MovieActivity extends AppCompatActivity {
         String url = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get(url, new JsonHttpResponseHandler(){
+        client.get(url, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 JSONArray movieJsonResults = null;
@@ -80,5 +84,23 @@ public class MovieActivity extends AppCompatActivity {
                 swipeContainer.setRefreshing(false);
             }
         });
+    }
+
+    private void setupListViewListener() {
+        lvItems.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapter,
+                                            View item, int pos, long id) {
+                        Intent intent = new Intent(getBaseContext(), MovieDetailActivity.class);
+                        Movie movie = movies.get(pos);
+                        intent.putExtra("title", movie.getOriginalTitle());
+                        intent.putExtra("overview", movie.getOverview());
+                        intent.putExtra("backdropPath", movie.getBackdropPath());
+                        intent.putExtra("voteAverage", movie.getVoteAverage());
+                        startActivity(intent);
+                    }
+                }
+        );
     }
 }
