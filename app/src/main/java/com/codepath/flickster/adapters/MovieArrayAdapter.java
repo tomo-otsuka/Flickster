@@ -1,10 +1,12 @@
 package com.codepath.flickster.adapters;
 
+import com.codepath.flickster.QuickPlayActivity;
 import com.codepath.flickster.R;
 import com.codepath.flickster.models.Movie;
 import com.squareup.picasso.Picasso;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -122,6 +124,16 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         if (viewHolder.tvOverview != null) {
             viewHolder.tvOverview.setText(movie.getOverview());
         }
+
+        final int movieNetworkId = movie.getNetworkId();
+        viewHolder.ivImage.setOnClickListener(new ImageView.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), QuickPlayActivity.class);
+                intent.putExtra("networkId", movieNetworkId);
+                getContext().startActivity(intent);
+            }
+        });
 
         return convertView;
     }
