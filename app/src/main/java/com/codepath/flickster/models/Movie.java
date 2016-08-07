@@ -40,11 +40,16 @@ public class Movie {
         return voteAverage;
     }
 
+    public int getNetworkId() {
+        return networkId;
+    }
+
     String posterPath;
     String backdropPath;
     String originalTitle;
     String overview;
     double voteAverage;
+    int networkId;
 
     public Movie(JSONObject jsonObject) throws JSONException {
         this.posterPath = jsonObject.getString("poster_path");
@@ -52,6 +57,7 @@ public class Movie {
         this.originalTitle = jsonObject.getString("original_title");
         this.overview = jsonObject.getString("overview");
         this.voteAverage = jsonObject.getDouble("vote_average");
+        this.networkId = jsonObject.getInt("id");
     }
 
     public static ArrayList<Movie> fromJSONArray(JSONArray array) {

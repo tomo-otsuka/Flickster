@@ -5,11 +5,14 @@ import com.squareup.picasso.Picasso;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 public class MovieDetailActivity extends AppCompatActivity {
+
+    int networkId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +26,8 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
+        networkId = intent.getIntExtra("networkId", -1);
+
         tvTitle.setText(intent.getStringExtra("title"));
         tvOverview.setText(intent.getStringExtra("overview"));
 
@@ -32,5 +37,19 @@ public class MovieDetailActivity extends AppCompatActivity {
                 .into(ivMovieImage);
 
         rbRating.setRating((float) intent.getDoubleExtra("voteAverage", 0));
+
+        setListeners();
+    }
+
+    private void setListeners() {
+        ImageView ivMovieImage = (ImageView) findViewById(R.id.ivMovieImage);
+        ivMovieImage.setOnClickListener(new ImageView.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(), QuickPlayActivity.class);
+                intent.putExtra("networkId", networkId);
+                startActivity(intent);
+            }
+        });
     }
 }
