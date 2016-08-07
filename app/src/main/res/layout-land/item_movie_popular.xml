@@ -16,6 +16,13 @@
         app:layout_widthPercent="66%"
         tools:src="@mipmap/ic_launcher" />
 
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        app:layout_marginLeftPercent="29%"
+        android:src="@drawable/play"/>
+
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
