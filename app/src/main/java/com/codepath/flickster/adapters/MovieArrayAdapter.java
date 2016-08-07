@@ -24,6 +24,8 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
     }
 
     private static class PopularViewHolder {
+        TextView tvTitle;
+        TextView tvOverview;
         ImageView ivImage;
     }
 
@@ -98,6 +100,8 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
             viewHolder = new PopularViewHolder();
             viewHolder.ivImage = (ImageView) convertView.findViewById(R.id.ivMovieImage);
+            viewHolder.tvOverview = (TextView) convertView.findViewById(R.id.tvOverview);
+            viewHolder.tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
 
             convertView.setTag(viewHolder);
         } else {
@@ -111,6 +115,13 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
                 .placeholder(R.drawable.movie_placeholder)
                 .error(R.drawable.movie_placeholder)
                 .into(viewHolder.ivImage);
+
+        if (viewHolder.tvTitle != null) {
+            viewHolder.tvTitle.setText(movie.getOriginalTitle());
+        }
+        if (viewHolder.tvOverview != null) {
+            viewHolder.tvOverview.setText(movie.getOverview());
+        }
 
         return convertView;
     }
