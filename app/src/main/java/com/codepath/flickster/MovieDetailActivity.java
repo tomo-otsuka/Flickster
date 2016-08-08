@@ -10,19 +10,25 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class MovieDetailActivity extends AppCompatActivity {
 
     int networkId;
+
+    @BindView(R.id.ivMovieImage) ImageView ivMovieImage;
+    @BindView(R.id.tvTitle) TextView tvTitle;
+    @BindView(R.id.tvOverview) TextView tvOverview;
+    @BindView(R.id.rbRating) RatingBar rbRating;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
 
-        ImageView ivMovieImage = (ImageView) findViewById(R.id.ivMovieImage);
-        TextView tvTitle = (TextView) findViewById(R.id.tvTitle);
-        TextView tvOverview = (TextView) findViewById(R.id.tvOverview);
-        RatingBar rbRating = (RatingBar) findViewById(R.id.rbRating);
+        ButterKnife.bind(this);
 
         Intent intent = getIntent();
 
@@ -37,19 +43,12 @@ public class MovieDetailActivity extends AppCompatActivity {
                 .into(ivMovieImage);
 
         rbRating.setRating((float) intent.getDoubleExtra("voteAverage", 0));
-
-        setListeners();
     }
 
-    private void setListeners() {
-        ImageView ivMovieImage = (ImageView) findViewById(R.id.ivMovieImage);
-        ivMovieImage.setOnClickListener(new ImageView.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), QuickPlayActivity.class);
-                intent.putExtra("networkId", networkId);
-                startActivity(intent);
-            }
-        });
+    @OnClick(R.id.ivMovieImage)
+    public void onMovieImageClick(View view) {
+        Intent intent = new Intent(getBaseContext(), QuickPlayActivity.class);
+        intent.putExtra("networkId", networkId);
+        startActivity(intent);
     }
 }
