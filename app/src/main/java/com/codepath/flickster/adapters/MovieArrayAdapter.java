@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
+
 public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
     private static class ViewHolder {
@@ -85,6 +87,7 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         }
 
         Picasso.with(getContext()).load(imagePath).fit().centerInside()
+                .transform(new RoundedCornersTransformation(10, 10))
                 .placeholder(R.drawable.movie_placeholder)
                 .error(R.drawable.movie_placeholder)
                 .into(viewHolder.ivImage);
@@ -114,6 +117,7 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         String imagePath = movie.getBackdropPath();
 
         Picasso.with(getContext()).load(imagePath).fit().centerInside()
+                .transform(new RoundedCornersTransformation(10, 10))
                 .placeholder(R.drawable.movie_placeholder)
                 .error(R.drawable.movie_placeholder)
                 .into(viewHolder.ivImage);
