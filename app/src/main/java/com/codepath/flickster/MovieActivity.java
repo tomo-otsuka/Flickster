@@ -1,6 +1,7 @@
 package com.codepath.flickster;
 
 import com.codepath.flickster.adapters.MovieArrayAdapter;
+import com.codepath.flickster.databinding.ActivityMovieBinding;
 import com.codepath.flickster.models.Movie;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -10,6 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +25,8 @@ import cz.msebera.android.httpclient.Header;
 
 public class MovieActivity extends AppCompatActivity {
 
+    private ActivityMovieBinding binding;
+
     ArrayList<Movie> movies;
     MovieArrayAdapter movieAdapter;
     ListView lvItems;
@@ -31,7 +35,7 @@ public class MovieActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movie);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_movie);
 
         initSwipeContainer();
         fetchMoviesAsync();
@@ -39,7 +43,7 @@ public class MovieActivity extends AppCompatActivity {
     }
 
     private void initSwipeContainer() {
-        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        swipeContainer = binding.swipeContainer;
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -55,7 +59,7 @@ public class MovieActivity extends AppCompatActivity {
     }
 
     private void fetchMoviesAsync() {
-        lvItems = (ListView) findViewById(R.id.lvMovies);
+        lvItems = binding.lvMovies;
         movies = new ArrayList<>();
         movieAdapter = new MovieArrayAdapter(this, movies);
         lvItems.setAdapter(movieAdapter);
